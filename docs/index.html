@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LernQuiz Pro</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+
+    <header class="main-header">
+        <div class="header-container">
+            <h1>🎓 LernQuiz</h1>
+            <div class="user-controls">
+                <span id="username">Lade...</span>
+                <button id="logoutBtn" class="btn-logout">Abmelden</button>
+            </div>
+        </div>
+    </header>
+
+    <main class="content-wrapper">
+        <div id="modeSelection" class="card animate-in">
+            <h2>Willkommen beim Training!</h2>
+            <p>Wähle einen Modus:</p>
+            <div class="answer-grid" style="margin-top: 2rem;">
+                <button id="startLearningBtn" class="btn-primary">Lernmodus</button>
+                <button id="startExamBtn" class="btn-primary">Prüfungsmodus</button>
+                <button id="rankingBtn" class="btn-primary" style="background: #444;">Ranking</button>
+            </div>
+        </div>
+        <div id="quizContainer" class="card hidden"></div>
+    </main>
+
+    <script src="../js/index.js"></script>
+</body>
+</html>
