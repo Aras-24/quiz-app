@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/style.css">
+    <title>Quiz App - Dashboard</title>
+</head>
+<body>
+    <header class="main-header">
+        <div class="header-container">
+            <div class="user-info">
+                <span class="welcome-text">Willkommen,</span>
+                <span id="username" class="user-badge"></span>
+            </div>
+            <nav class="main-nav">
+                <button id="rankingBtn" class="btn-nav">🏆 Ranking</button>
+                <button id="logoutBtn" class="btn-logout">Abmelden</button>
+            </nav>
+        </div>
+    </header>
+
+    <main class="content-wrapper">
+        <div id="mainContent" class="card">
+            <div id="modeSelection" class="mode-menu">
+                <h2>Wähle einen Modus</h2>
+                <div class="mode-buttons">
+                    <button id="startLearningBtn" class="btn-large">📖 Lernmodus</button>
+                    <button id="startExamBtn" class="btn-large">⏱️ Prüfungsmodus</button>
+                </div>
+            </div>
+            <div id="quizContainer" class="hidden"></div>
+        </div>
+    </main>
+
+    <script src="../js/index.js"></script>
+</body>
+</html>

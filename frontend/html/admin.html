@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="../css/admin.css">
+  <title>Admin Panel - Quiz App</title>
+</head>
+<body>
+  <header class="main-header">
+    <div class="header-container">
+      <div class="user-info">
+        <span>Admin:</span>
+        <span id="username" class="user-badge"></span>
+      </div>
+      <nav class="main-nav">
+        <button id="logoutBtn" class="btn-logout">Abmelden</button>
+      </nav>
+    </div>
+  </header>
+
+  <main class="content-wrapper">
+    <div id="mainContent" class="card">
+      <h2>Fragenverwaltung</h2>
+      <div class="admin-actions">
+        <button id="addMCBtn" class="btn-nav">Multiple-Choice hinzufügen</button>
+        <button id="addOpenBtn" class="btn-nav">Offene Frage hinzufügen</button>
+      </div>
+
+      <div id="formContainer"></div>
+      
+      <hr style="margin: 2rem 0; border: 0; border-top: 1px solid #eee;">
+      
+      <div id="questionList"></div>
+    </div>
+  </main>
+
+  <script src="../js/admin.js"></script>
+</body>
+</html>

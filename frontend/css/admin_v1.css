@@ -1,0 +1,186 @@
+:root {
+    --primary: #764ba2;
+    --secondary: #667eea;
+    --success: #27ae60;
+    --danger: #e74c3c;
+    --bg: #f0f2f5;
+    --text: #333;
+    --white: #ffffff;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    background-color: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+}
+
+/* --- Header & Nav --- */
+.main-header {
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    color: white;
+    padding: 1rem 2rem;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.header-container {
+    max-width: 1000px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.user-badge {
+    background: rgba(255,255,255,0.2);
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-weight: bold;
+    margin-left: 5px;
+}
+
+.main-nav {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+/* --- Buttons --- */
+.btn-nav, .btn-logout, .btn-delete {
+    padding: 10px 16px;
+    border-radius: 8px;
+    border: none;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-weight: 600;
+}
+
+.btn-nav { 
+    background: var(--secondary); 
+    color: white; 
+    margin-right: 5px;
+    margin-bottom: 10px;
+}
+.btn-nav:hover { 
+    background: var(--primary); 
+    transform: translateY(-1px);
+}
+
+/* Spezieller Style für Buttons im Header (weiß) */
+.header-container .btn-nav {
+    background: white;
+    color: var(--primary);
+}
+
+.btn-logout { background: #ff4757; color: white; }
+.btn-logout:hover { background: #ff6b81; }
+
+/* --- Main Content & Layout --- */
+.content-wrapper {
+    padding: 2rem 1rem;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.card {
+    background: var(--white);
+    padding: 2rem;
+    border-radius: 16px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+}
+
+h2, h3 {
+    color: var(--primary);
+    margin-top: 0;
+}
+
+/* --- Formular Styles (für neue Fragen) --- */
+#formContainer {
+    margin: 2rem 0;
+    padding: 1.5rem;
+    background: #f9f9fb;
+    border-radius: 12px;
+    border: 1px solid #e1e4e8;
+}
+
+input[type="text"] {
+    width: 100%;
+    padding: 12px;
+    margin: 8px 0;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-sizing: border-box; /* Wichtig für Padding */
+    font-size: 1rem;
+}
+
+input[type="text"]:focus {
+    outline: none;
+    border-color: var(--secondary);
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+#mcAnswersContainer div {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: white;
+    padding: 8px;
+    margin-bottom: 5px;
+    border-radius: 6px;
+}
+
+/* --- Question List Styles --- */
+#questionList {
+    margin-top: 2rem;
+}
+
+.question-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    background: #fff;
+    border: 1px solid #eee;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    transition: 0.2s;
+}
+
+.question-item:hover {
+    border-color: var(--secondary);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+.question-item span {
+    font-weight: 500;
+    color: var(--text);
+}
+
+/* Löschen Button in der Liste */
+.question-item .btn-nav {
+    background: var(--danger);
+    margin-bottom: 0; /* Reset für Listendarstellung */
+}
+
+/* --- Feedback & Status --- */
+.error {
+    color: var(--danger);
+    font-weight: bold;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+    .header-container { 
+        flex-direction: column; 
+        text-align: center; 
+    }
+    .question-item {
+        flex-direction: column;
+        gap: 10px;
+        text-align: center;
+    }
+}

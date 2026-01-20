@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/login.css">
+    <title>Quiz App Login</title>
+</head>
+<body>
+    <div class="auth-container">
+        <div class="auth-card">
+            <h1 id="formTitle">Quiz App Login</h1>
+            
+            <form id="loginForm">
+                <div class="input-group">
+                    <label for="username">Benutzername</label>
+                    <input type="text" id="username" name="username" placeholder="Dein Name" required>
+                </div>
+
+                <div class="input-group">
+                    <label for="password">Passwort</label>
+                    <input type="password" id="password" name="password" placeholder="••••••••" required>
+                </div>
+
+                <button type="submit" class="btn-primary">Anmelden</button>
+            </form>
+
+            <form id="registerForm" class="hidden">
+                <div class="input-group">
+                    <label for="regUsername">Neuer Benutzername</label>
+                    <input type="text" id="regUsername" name="username" placeholder="Wähle einen Namen" required>
+                </div>
+
+                <div class="input-group">
+                    <label for="regPassword">Passwort wählen</label>
+                    <input type="password" id="regPassword" name="password" placeholder="Sicheres Passwort" required>
+                </div>
+
+                <button type="submit" class="btn-primary">Konto erstellen</button>
+            </form>
+
+            <div class="auth-footer">
+                <p id="toggleText">Noch kein Konto? <a href="#" id="showRegister">Jetzt registrieren</a></p>
+                <p id="message"></p>
+            </div>
+        </div>
+    </div>
+
+    <script src="../js/login.js"></script>
+</body>
+</html>

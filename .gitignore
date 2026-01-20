@@ -1,0 +1,42 @@
+# Node modules
+node_modules/
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Environment variables
+.env
+.env.local
+.env.*.local
+
+# Build / Dist
+dist/
+build/
+
+# Cache
+.cache/
+.npm/
+.eslintcache
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE / Editor
+.vscode/
+!.vscode/settings.json
+!.vscode/extensions.json
+
+# Coverage
+coverage/
+
+# Optional: DB files (z.B. SQLite)
+*.sqlite
+*.db
+
+# Eigene Daten
+Datensatz/
+aras.text
