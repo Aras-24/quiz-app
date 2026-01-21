@@ -40,8 +40,8 @@ const server = http.createServer(async (req, res) => {
     console.log("Origin test mit *:", req.headers.origin);
     console.log("ALLOWED_ORIGINS:", ALLOWED_ORIGINS);
 
-    const origin = req.headers.origin || "*";
-    if (origin && ALLOWED_ORIGINS.includes(origin) || origin === "*") {
+    const origin = req.headers.origin;
+    if (origin && ALLOWED_ORIGINS.includes(origin)) {
       res.setHeader("Access-Control-Allow-Origin", origin);
     }
     res.setHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS, DELETE");
