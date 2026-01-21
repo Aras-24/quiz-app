@@ -37,8 +37,8 @@ const server = http.createServer(async (req, res) => {
     );
 
     // --- CORS ---
-    console.log("Origin test mit *:", req.headers.origin);
-    console.log("ALLOWED_ORIGINS:", ALLOWED_ORIGINS);
+    //console.log("Origin test mit *:", req.headers.origin);
+    //console.log("ALLOWED_ORIGINS:", ALLOWED_ORIGINS);
 
     const origin = req.headers.origin;
     if (origin && ALLOWED_ORIGINS.includes(origin)) {
