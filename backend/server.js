@@ -12,7 +12,7 @@ initAdmin();
 
 // Erlaube GitHub Pages & lokale Tests
 const ALLOWED_ORIGINS = [
-  "https://Aras-24.github.io", // Frontend GitHub Pages
+  "https://aras-24.github.io", // Frontend GitHub Pages
   "http://localhost:5500", // lokal
   "http://127.0.0.1:5500", // lokal
 ];
