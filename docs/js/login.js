@@ -1,4 +1,4 @@
-import { API_BASE } from "./config";
+import { API_BASE } from "./config.js";
 
 
 const loginForm = document.getElementById("loginForm");
