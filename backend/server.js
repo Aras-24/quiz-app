@@ -70,5 +70,12 @@ const server = http.createServer(async (req, res) => {
 });
 
 server.listen(PORT, () => {
-  console.log(`✅ Server läuft auf http://localhost:${PORT}`);
+  const isRender = Boolean(process.env.RENDER);
+  if(isRender){
+    console.log(`✅ Server läuft auf Render`);
+    console.log(`Public URL: https://quiz-app-9xz2.onrender.com`);
+  }else{
+    console.log(`✅ Server läuft lokal auf http://localhost:${PORT}`);
+  }
+  
 });

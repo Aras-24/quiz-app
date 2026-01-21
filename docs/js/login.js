@@ -1,3 +1,6 @@
+import { API_BASE } from "./config.js";
+
+
 const loginForm = document.getElementById("loginForm");
 const registerForm = document.getElementById("registerForm");
 const showRegister = document.getElementById("showRegister");
@@ -20,7 +23,7 @@ showRegister.addEventListener("click", (e) => {
   } else {
     // Zu Login wechseln
     registerForm.classList.add("hidden");
-    loginForm.classList.remove("hidden");
+    loginForm.classList.remove("hidden"); 
     formTitle.textContent = "Quiz App Login";
     showRegister.textContent = "Jetzt registrieren";
     toggleText.firstChild.textContent = "Noch kein Konto? ";
@@ -43,7 +46,7 @@ loginForm.addEventListener("submit", async (e) => {
   const password = document.getElementById("password").value.trim();
 
   try {
-    const res = await fetch("http://localhost:3000/api/login", {
+    const res = await fetch(`${API_BASE}/api/login`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ username, password }),
@@ -80,7 +83,7 @@ registerForm.addEventListener("submit", async (e) => {
   const password = document.getElementById("regPassword").value.trim();
 
   try {
-    const res = await fetch("http://localhost:3000/api/register", {
+    const res = await fetch(`${API_BASE}/api/register`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ username, password }),

@@ -1,5 +1,8 @@
+import { API_BASE } from "./config.js";
+
+
 document.addEventListener("DOMContentLoaded", () => {
-  // 🔹 Admin-Schutz
+  // Admin-Schutz
   const role = localStorage.getItem("role");
   const token = localStorage.getItem("token");
 
@@ -30,7 +33,7 @@ document.addEventListener("DOMContentLoaded", () => {
   async function loadQuestions() {
     questionList.innerHTML = "<p>Lade Fragen...</p>";
     try {
-      const res = await fetch("http://localhost:3000/api/admin/questions", {
+      const res = await fetch(`${API_BASE}/api/admin/questions`, {
         headers: { "Authorization": `Bearer ${token}` }
       });
       const data = await res.json();
@@ -65,7 +68,7 @@ document.addEventListener("DOMContentLoaded", () => {
   async function deleteQuestion(id) {
     if (!confirm("Frage wirklich löschen?")) return;
     try {
-      await fetch(`http://localhost:3000/api/admin/questions/${id}`, {
+      await fetch(`${API_BASE}/api/admin/questions/${id}`, {
         method: "DELETE",
         headers: { "Authorization": `Bearer ${token}` }
       });
@@ -125,7 +128,7 @@ document.addEventListener("DOMContentLoaded", () => {
       }
 
       try {
-        await fetch("http://localhost:3000/api/admin/questions", {
+        await fetch(`${API_BASE}/api/admin/questions`, {
           method: "POST",
           headers: { 
             "Content-Type": "application/json",
@@ -161,7 +164,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const keywords = document.getElementById("keywords").value.split(",").map(k => k.trim());
 
       try {
-        await fetch("http://localhost:3000/api/admin/questions", {
+        await fetch(`${API_BASE}/api/admin/questions`, {
           method: "POST",
           headers: { 
             "Content-Type": "application/json",
