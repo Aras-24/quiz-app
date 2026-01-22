@@ -1,13 +1,11 @@
-// backend/utils/escapeHtml.js
-function escapeHtml(str) {
-  if (typeof str !== "string") return str;
-
-  return str
-    .replace(/&/g, "&amp;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;")
-    .replace(/"/g, "&quot;")
-    .replace(/'/g, "&#039;");
+// docs/js/escapeHtml.js
+export function escapeHtml(str) {
+    if (!str) return "";
+    return str
+      .replaceAll("&", "&amp;")
+      .replaceAll("<", "&lt;")
+      .replaceAll(">", "&gt;")
+      .replaceAll('"', "&quot;")
+      .replaceAll("'", "&#039;")
+      .replaceAll("/", "&#x2F;");
 }
-
-module.exports = escapeHtml;
