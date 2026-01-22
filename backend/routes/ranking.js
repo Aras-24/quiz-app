@@ -1,3 +1,5 @@
+//ranking.js
+
 const Result = require("../models/result");
 const User = require("../models/user");
 

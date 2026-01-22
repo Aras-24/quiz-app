@@ -1,3 +1,5 @@
+// quiz.js
+
 const Question = require("../models/question");
 const Result = require("../models/result");
 const jwtUtil = require("../utils/jwt");

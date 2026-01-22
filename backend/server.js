@@ -1,3 +1,5 @@
+//server.js
+
 const http = require("http");
 const { PORT } = require("./config");
 const authHandler = require("./routes/auth");

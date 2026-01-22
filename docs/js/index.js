@@ -1,5 +1,6 @@
 // index.js
-import { API_BASE } from "./config.js"; // <-- dein Render Backend
+import { API_BASE } from "./config.js"; 
+import { escapeHtml } from "./escapeHtml.js";
 
 document.addEventListener("DOMContentLoaded", () => {
   // --- KONFIGURATION ---
@@ -29,11 +30,11 @@ document.addEventListener("DOMContentLoaded", () => {
     window.location.href = "login.html";
     return;
   }
-  document.getElementById("username").textContent = state.username;
+  document.getElementById("username").textContent = escapeHtml(state.username);
 
   // --- NAVIGATION & TIMER ---
 
-  // KORREKTUR: Führt zum Hauptmenü zurück, ohne Logout
+  // Führt zum Hauptmenü zurück, ohne Logout
   const resetToMenu = () => {
     if (state.timer) clearInterval(state.timer);
     window.location.reload();
@@ -81,7 +82,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const res = await fetch(
        `${API_BASE}/api/quiz?category=${category}${limitParam}`,
         {
-          headers: { Authorization: `Bearer ${state.token}` },
+          headers: { Authorization: `Bearer ${state.token}`,"X-Requested-With": "XMLHttpRequest",  },
         },
       );
       const data = await res.json();
@@ -112,7 +113,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     <span>Frage ${state.currentIndex + 1} von ${state.questions.length}</span>
                     ${state.isExamMode ? `<b id="examTimer" style="background:#eee; padding:5px 10px; border-radius:8px;"></b>` : "<span>Übung</span>"}
                 </div>
-                <div class="question-box">${q.question}</div>
+                <div class="question-box">${escapeHtml(q.question)}</div>
                 <div id="actionArea"></div>
                 <div id="feedback" class="hidden animate-in" style="margin-top:20px; font-weight:bold; padding:20px; border-radius:15px; background:#f8fafc; border:1px solid #eee;"></div>
                 <button id="nextBtn" class="btn-primary hidden" style="margin-top:15px;">Nächste Frage</button>
@@ -129,7 +130,7 @@ document.addEventListener("DOMContentLoaded", () => {
       q.answers.forEach((ans, i) => {
         const btn = document.createElement("button");
         btn.className = "answer-btn";
-        btn.textContent = ans.text;
+        btn.textContent = escapeHtml(ans.text);
         btn.onclick = () => checkAnswer(i, btn);
         grid.appendChild(btn);
       });
@@ -140,7 +141,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 <button id="submitBtn" class="btn-primary" style="margin-top:10px;">Bestätigen</button>
             `;
       const input = document.getElementById("openInput");
-      input.onkeypress = (e) => {
+      input.onkeypress = (e)  => {
         if (e.key === "Enter") checkAnswer(input.value.trim());
       };
       document.getElementById("submitBtn").onclick = () =>
@@ -202,7 +203,7 @@ document.addEventListener("DOMContentLoaded", () => {
       q.type === "MC" ? q.answers.find((a) => a.correct).text : q.solution;
     fArea.innerHTML = isCorrect
       ? `<p style="color:var(--success)">Richtig!</p>`
-      : `<p style="color:var(--danger)"> Falsch. Lösung: ${solution}</p>`;
+      : `<p style="color:var(--danger)"> Falsch. Lösung: ${escapeHtml(solution)}</p>`;
     document
       .querySelectorAll("#actionArea button, #actionArea input")
       .forEach((el) => (el.disabled = true));
@@ -243,6 +244,7 @@ document.addEventListener("DOMContentLoaded", () => {
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${state.token}`,
+          "X-Requested-With": "XMLHttpRequest",
         },
         body: JSON.stringify({
           score: state.score,
@@ -259,7 +261,7 @@ document.addEventListener("DOMContentLoaded", () => {
     let h = `<h3>Review</h3><div style="text-align:left; max-height: 400px; overflow-y: auto; margin-top:15px;">`;
     state.userAnswers.forEach((ans, i) => {
       h += `<div style="padding:15px; border-bottom:1px solid #eee; border-left: 5px solid ${ans.isCorrect ? "var(--success)" : "var(--danger)"}; margin-bottom:10px; background:#fff; border-radius:10px;">
-                    <strong>${i + 1}. ${ans.question}</strong><br>
+                    <strong>${i + 1}. ${escapeHtml(ans.question)}</strong><br>
                     <span style="color:${ans.isCorrect ? "var(--success)" : "var(--danger)"}">Deine Antwort: ${ans.userChoice}</span><br>
                     ${!ans.isCorrect ? `<span style="color:var(--success)">Lösung: ${ans.correctAnswer}</span>` : ""}
                 </div>`;
@@ -292,7 +294,7 @@ document.addEventListener("DOMContentLoaded", () => {
     quizContainer.innerHTML = "<h3>Lade Kategorien...</h3>";
     try {
       const res = await fetch(`${API_BASE}/api/categories`, {
-        headers: { Authorization: `Bearer ${state.token}` },
+        headers: { Authorization: `Bearer ${state.token}`, "X-Requested-With": "XMLHttpRequest",},
       });
       const data = await res.json();
       quizContainer.innerHTML = `<h3>Thema wählen</h3><div id="catGrid" class="answer-grid"></div><button id="catBack" class="btn-primary" style="margin-top:20px; background:#444;">Zurück</button>`;
@@ -300,7 +302,7 @@ document.addEventListener("DOMContentLoaded", () => {
       data.categories.forEach((c) => {
         const b = document.createElement("button");
         b.className = "answer-btn";
-        b.textContent = c;
+        b.textContent = escapeHtml(c);
         b.onclick = () => startQuiz(c, false);
         document.getElementById("catGrid").appendChild(b);
       });
@@ -314,7 +316,7 @@ document.addEventListener("DOMContentLoaded", () => {
     quizContainer.classList.remove("hidden");
     try {
       const res = await fetch(`${API_BASE}/api/ranking`, {
-        headers: { Authorization: `Bearer ${state.token}` },
+        headers: { Authorization: `Bearer ${state.token}`,"X-Requested-With": "XMLHttpRequest" },
       });
       const d = await res.json();
       let h = `<h3>🏆 Bestenliste</h3><table style="width:100%; margin-top:10px;">
@@ -327,7 +329,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     h += `<tr class="${isMe ? 'ranking-row-me' : ''}">
             <td style="padding:15px; font-weight:bold;">${medal}</td>
-            <td style="padding:15px;">${r.username}</td>
+            <td style="padding:15px;">${escapeHtml(r.username)}</td>
             <td style="padding:15px; text-align:right; font-weight:bold;">${r.score}</td>
             <td style="padding:15px; text-align:right;">${r.timeUsed}s</td>
           </tr>`;

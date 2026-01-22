@@ -53,28 +53,15 @@ document.addEventListener("DOMContentLoaded", () => {
     questions.forEach(q => {
       const div = document.createElement("div");
       div.className = "question-item";
-      const info = document.createElement("div");
-      info.className = "question-info";
-
-      const title = document.createElement("strong");
-      title.textContent = q.question; 
-
-      const meta = document.createElement("div");
-      meta.textContent = `Typ: ${q.type} | Kategorie: ${q.category}`;
-      meta.style.fontSize = "0.8rem";
-      meta.style.color = "#666";
-
-      info.appendChild(title);
-      info.appendChild(meta);
-
-      const btn = document.createElement("button");
-      btn.textContent = "Löschen"; 
-      btn.className = "btn-logout";
-      btn.onclick = () => deleteQuestion(q._id);
-
-      div.appendChild(info);
-      div.appendChild(btn);
+      div.innerHTML = `
+        <div class="question-info">
+          <strong>${q.question}</strong>
+          <div style="font-size: 0.8rem; color: #666;">Typ: ${q.type} | Kategorie: ${q.category}</div>
+        </div>
+        <button class="btn-logout" style="padding: 5px 10px;">Löschen</button>
+      `;
       questionList.appendChild(div);
+      div.querySelector("button").onclick = () => deleteQuestion(q._id);
     });
   }
 

@@ -1,5 +1,5 @@
 import { API_BASE } from "./config.js";
-
+import { escapeHtml } from "./escapeHtml.js";
 
 const loginForm = document.getElementById("loginForm");
 const registerForm = document.getElementById("registerForm");
@@ -33,7 +33,7 @@ showRegister.addEventListener("click", (e) => {
 
 // Hilfsfunktion für Nachrichten
 function displayMessage(text, type) {
-  message.textContent = text;
+  message.textContent = escapeHtml(text);
   message.className = type; // 'error' oder 'success'
 }
 
@@ -48,7 +48,7 @@ loginForm.addEventListener("submit", async (e) => {
   try {
     const res = await fetch(`${API_BASE}/api/login`, {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: { "Content-Type": "application/json","X-Requested-With": "XMLHttpRequest" },
       body: JSON.stringify({ username, password }),
     });
 
@@ -60,7 +60,7 @@ loginForm.addEventListener("submit", async (e) => {
     }
 
     localStorage.setItem("token", data.token);
-    localStorage.setItem("username", username);
+    localStorage.setItem("username", escapeHtml(username));
     localStorage.setItem("role", data.role);
     // Weiterleitung je nach Rolle
     if (data.role === "ROLE_ADMIN") {
@@ -74,7 +74,7 @@ loginForm.addEventListener("submit", async (e) => {
   }
 });
 
-// Registrierung Event
+// Registrierung 
 registerForm.addEventListener("submit", async (e) => {
   e.preventDefault();
   displayMessage("", "");
@@ -85,7 +85,7 @@ registerForm.addEventListener("submit", async (e) => {
   try {
     const res = await fetch(`${API_BASE}/api/register`, {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: { "Content-Type": "application/json" ,"X-Requested-With": "XMLHttpRequest" },
       body: JSON.stringify({ username, password }),
     });
 

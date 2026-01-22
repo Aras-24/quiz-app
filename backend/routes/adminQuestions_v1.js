@@ -3,7 +3,6 @@
 const Question = require("../models/question");
 const bodyParser = require("../utils/bodyParser");
 const adminAuth = require("../utils/adminAuth");
-const escapeHtml = require("../utils/escapeHtml");
 
 function sendError(res, msg, code = 403) {
   res.writeHead(code, { "Content-Type": "application/json" });
@@ -21,7 +20,7 @@ async function adminQuestions(req, res) {
     const data = await bodyParser(req);
 
     if (data.type === "MC") {
-      const correctCount = data.answers.filter((a) => a.correct).length;
+      const correctCount = data.answers.filter(a => a.correct).length;
       if (correctCount > 1) {
         data.hint = "Mehrere Antworten können korrekt sein";
       }
@@ -34,17 +33,7 @@ async function adminQuestions(req, res) {
   // READ
   if (req.method === "GET" && pathname === "/api/admin/questions") {
     const list = await Question.find();
-
-    // XSS-Schutz
-    const safeList = list.map((q) => ({
-      ...q._doc,
-      question: escapeHtml(q.question),
-      category: escapeHtml(q.category),
-      solution: q.solution ? escapeHtml(q.solution) : undefined,
-      answers: q.answers?.map((a) => ({ ...a, text: escapeHtml(a.text) })),
-    }));
-
-    return res.end(JSON.stringify({ questions: safeList }));
+    return res.end(JSON.stringify({ questions: list }));
   }
 
   // DELETE
