@@ -1,6 +1,5 @@
 import { API_BASE } from "./config.js";
 
-
 document.addEventListener("DOMContentLoaded", () => {
   // Admin-Schutz
   const role = localStorage.getItem("role");
